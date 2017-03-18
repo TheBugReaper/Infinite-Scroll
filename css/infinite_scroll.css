@@ -42,8 +42,28 @@ body {
     height : 100px;
 }
 .preload-block.active > .preload-img > img{
+    -webkit-animation: preload 2s linear 0s infinite normal;
+    -moz-animation:preload 2s linear 0s infinite normal ;
     animation: preload 2s linear 0s infinite normal;
 }
+
+@-webkit-keyframes preload {
+    from {
+        transform : rotate(0deg);
+    }
+    to {
+        transform : rotate(360deg);
+    }
+}
+
+@-moz-keyframes preload {
+     from {
+         transform : rotate(0deg);
+     }
+     to {
+         transform : rotate(360deg);
+     }
+ }
 
 @keyframes preload {
     from {
