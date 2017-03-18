@@ -1,17 +1,24 @@
 /**
  * Created by linjunru on 2017/3/18.
  */
+/*Compatibility Settings*/
 window.addEventListener = (window.addEventListener) ? window.addEventListener : window.attachEvent;
 addEventListener = addEventListener ? addEventListener : attachEvent;
 
-adding = false;
+adding = false;     //to ensure the page only load once after an event is emitted
 
+/**
+ * Add EventListener to the mousewhieel event of the document.
+ * Use
+ * <code> window.pageYOffset + window.innerHeight > document.body.offsetHeight <code>
+ * to judge whether it is the right time to add new items.
+ */
 function addInfiniteScrollControl(){
     window.addEventListener("mousewheel", function(e){
         var event = e ? e : window.e;
         if (window.pageYOffset + window.innerHeight > document.body.offsetHeight){
             if (event.wheelDelta < 0){
-                //Update
+                //Add contents
                 if(!adding){
                     adding = true;
                     var classes = document.getElementById("preload-block").classList;
@@ -32,6 +39,10 @@ function addInfiniteScrollControl(){
     })
 }
 
+/**
+ * Add an new item to the waterfall structure.
+ * The new item will be added to the shortest column measured by scrollheight.
+ */
 function addItem(){
     var cols = document.getElementsByClassName("waterfall-col");
     var newItem = createItem();
@@ -45,6 +56,10 @@ function addItem(){
     cols[index].appendChild(newItem);
 }
 
+/**
+ * Create an new Item, the pic will be selected randomly.
+ * @returns {HTMLElement}
+ */
 function createItem(){
     var num = Math.random() * 17 + 1;
     num = Math.floor(num);
